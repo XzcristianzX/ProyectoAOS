@@ -1,12 +1,15 @@
 import { Router } from "express";
-import {create, getAll} from "../controllers/producto.controller.js";
+import {update, create, getName, getAll, deleteP} from "../controllers/producto.controller.js";
 import {validate} from  "../middlewares/validator.middleware.js";
-import { productoValidator } from "../validators/producto.validator.js";
+import { createProductValidator, updateProductValidator, getProductByNameValidator } from "../validators/producto.validator.js";
+import {verifyToken} from "../middlewares/token.middleware.js";
 
 const router = Router();
 
-router.get("/", validate(productoValidator) , getAll );
-
-router.put("/",  create);
+router.get("/All", getAll);
+router.get("/", validate(getProductByNameValidator), getName);
+router.post("/", validate(createProductValidator), create);
+router.put("/", validate(updateProductValidator), update);
+router.delete("/", deleteP);
 
 export default router;
