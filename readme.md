@@ -1,4 +1,4 @@
-# Clase 15-08-2023
+# Parcial 2024
 ## Instalación
 
 ### Clonar el repositorio:
