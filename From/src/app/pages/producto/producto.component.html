@@ -1,0 +1,12 @@
+<p>producto works!</p>
+<a [routerLink]="['/producto', 50]">pulsar aqui</a>
+
+<ul>
+
+
+@for (item of produc$ | async ; track $index) {
+
+    <li>{{ item["title"] }}</li>
+
+}
+</ul>
