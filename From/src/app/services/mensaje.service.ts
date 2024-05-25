@@ -1,18 +1,27 @@
 import { Injectable } from '@angular/core';
-import { MensajeInterface } from '../interfaces/mensaje';
+import { MensajeInterface } from '../interfaces/mensaje-interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MensajeService {
 
-  mensaje : MensajeInterface[] = [] ;
 
+
+  mensaje :MensajeInterface[]= [];
   constructor() { }
 
+  addMensaje(msn: string, au:string){
 
-  addMensaje(msn : string, author: string){
-    this.mensaje.push({mensaje: msn, author: author});
+    
+    this.mensaje.push({mensaje: msn, autor: au});
+
+
   }
 
+
+
+
+
 }
+

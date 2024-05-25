@@ -1,34 +1,37 @@
 import { Routes } from '@angular/router';
-import { ChatComponent } from './pages/chat/chat.component';
-import { ProductoComponent } from './pages/producto/producto.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ChatComponent } from './pages/chat/chat.component';
 import { ErrorComponent } from './pages/error/error.component';
-import { ProductoDetailComponent } from './pages/producto-detail/producto-detail.component';
+import {LoginComponent} from "./pages/login/login.component";
 
 export const routes: Routes = [
     {
-        path:'',
-        pathMatch:'full',
-        redirectTo:'home'
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'login'
     },
     {
-        path:'home',
+      path: 'login',
+      component: LoginComponent
+    },
+    {
+        path: 'home',
         component: HomeComponent
     },
     {
-        path:'producto/:id',
-        component: ProductoDetailComponent
+        path: 'home2/:id',
+        component: HomeComponent
     },
     {
-        path:'producto',
-        component: ProductoComponent
+        path: 'chat',
+        component: ChatComponent
     },
     {
-        path: 'chat', 
-        loadComponent: ()=> import("./pages/chat/chat.component").then(m => m.ChatComponent)
+        path: 'producto',
+        loadComponent: ()=> import("./pages/producto/producto.component")
     },
     {
-        path:'**',
-        component: ErrorComponent,
+        path: '**',
+        component: ErrorComponent
     }
 ];

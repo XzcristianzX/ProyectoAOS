@@ -3,13 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "administracion": {
+    "clasedehoy": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -17,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/administracion",
+            "outputPath": "dist/clasedehoy",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -61,10 +57,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "administracion:build:production"
+              "buildTarget": "clasedehoy:build:production"
             },
             "development": {
-              "buildTarget": "administracion:build:development"
+              "buildTarget": "clasedehoy:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +68,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "administracion:build"
+            "buildTarget": "clasedehoy:build"
           }
         },
         "test": {
@@ -97,6 +93,6 @@
     }
   },
   "cli": {
-    "analytics": "25be0e57-e66a-4ff9-a0db-cc9bd4a4bbb5"
+    "analytics": "4508c085-58bc-4684-a695-4851f0d20ed0"
   }
 }

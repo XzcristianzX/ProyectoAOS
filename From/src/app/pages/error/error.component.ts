@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './error.component.html',
-  styleUrl: './error.component.scss'
+  styleUrl: './error.component.css'
 })
 export class ErrorComponent {
 

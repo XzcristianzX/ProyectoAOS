@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { PrimeroComponent } from '../../components/primero/primero.component';
-import { SegundoComponent } from '../../components/segundo/segundo.component';
+import { UnoComponent } from '../../components/uno/uno.component';
+import { DosComponent } from '../../components/dos/dos.component';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [PrimeroComponent, SegundoComponent],
+  imports: [UnoComponent, DosComponent],
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss'
+  styleUrl: './chat.component.css'
 })
 export class ChatComponent {
 

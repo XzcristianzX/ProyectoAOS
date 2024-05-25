@@ -1,13 +1,22 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { ChatComponent } from './pages/chat/chat.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, ChatComponent, RouterLink, FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'administracion';
+  title = 'clasedehoy';
+  username: string = '';
+  password: string = '';
+
+  constructor(private router: Router) {}
+
+
 }
