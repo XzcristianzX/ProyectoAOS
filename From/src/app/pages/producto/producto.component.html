@@ -1,0 +1,48 @@
+<div class="wrapper-producto">
+  <div class="table-container">
+    <span>Administra tus productos</span>
+    <table class="customers-table">
+      <thead>
+      <tr>
+        <th>Options</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Imagen</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of productos | paginate: { itemsPerPage: 8, currentPage: page }">
+        <td>
+          <button (click)="deleteProducto(product.id)">Eliminar</button>
+          <button (click)="updateProducto(product)"> Editar</button>
+        </td>
+        <td>{{ product.title }}</td>
+        <td>${{ product.price }}</td>
+        <td><img [src]="product.images" alt="" class="avatar"></td>
+        <!--        <td><span >{{product.category.name}}</span></td>-->
+      </tr>
+      </tbody>
+    </table>
+    <div class="table-pagination">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+
+<h3>Agregar Nuevo Producto</h3>
+<form (ngSubmit)="addProducto()">
+  <label>Título:</label>
+  <input [(ngModel)]="newProducto.title" name="title" required/>
+  <label>Descripción:</label>
+  <input [(ngModel)]="newProducto.description" name="descripcion" required/>
+  <label>Valor:</label>
+  <input [(ngModel)]="newProducto.price" name="valor" type="number" required/>
+  <label>Imagen URL:</label>
+  <input [(ngModel)]="newProducto.images[0]" name="image" required/>
+  <button type="submit">Agregar</button>
+</form>
+
+
+
+

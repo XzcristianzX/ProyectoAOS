@@ -1,0 +1,19 @@
+<p>uno works!</p>
+
+<form (ngSubmit)="enviar()" >
+    <div class="chat" #scroll [scrollTop]="scroll.scrollHeight">
+        @for (item of msnService.mensaje; track $index) {
+            <div>
+                <span>{{item.autor}}</span>
+                <label>{{item.mensaje}}</label>
+            </div>
+        }
+    </div>
+
+    <div>
+        <label >Mensaje</label>
+        <input name="mensaje" [(ngModel)]="mensaje"/>
+        <button type="submit">ENVIAR</button>
+    </div>
+
+</form>
