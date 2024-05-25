@@ -1,79 +1,81 @@
-.wrapper-login {
-  background-image: url('https://getwallpapers.com/wallpaper/full/e/6/7/1403336-neon-lights-wallpaper-3840x2160-for-hd.jpg');
-  background-size: cover;
-  background-position: center;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0;
-}
-
+ .wrapper-login {
+   background-image: url('https://getwallpapers.com/wallpaper/full/e/6/7/1403336-neon-lights-wallpaper-3840x2160-for-hd.jpg');
+   background-size: cover;
+   background-position: center;
+   font-family: 'Arial', sans-serif;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   overflow: hidden;
+   margin: 0;
+ }
 
 form {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 20px rgba(255, 2, 2, 0.2);
+  background: linear-gradient(135deg, rgba(255, 0, 150, 0.2), rgba(0, 204, 255, 0.2));
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   max-width: 400px;
   margin: auto;
-  height: 400px;
-  width: 500px;
+  height: 450px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-
 label {
-  color: #000000;
-  font-size: 14px;
-  margin-bottom: 5px;
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 input[type="text"],
 input[type="password"] {
   width: calc(100% - 20px);
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 15px;
+  margin-bottom: 20px;
   border: none;
-  background-color: #454545;
+  background-color: rgba(0, 0, 0, 0.5);
   color: #ffffff;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 18px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 input[type="submit"] {
   width: calc(100% - 20px);
-  padding: 10px;
+  padding: 15px;
   border: none;
-  background-color: #0046ff;
-  color: #000000;
-  border-radius: 5px;
-  font-size: 16px;
+  background: linear-gradient(135deg, #ff00aa, #0046ff);
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.5s ease, transform 0.3s ease;
   text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 70, 255, 0.5);
 }
 
 form p {
-  color: #0c0909;
+  color: #ffffff;
   font-size: 14px;
   text-align: center;
-  margin-top: 15px;
+  margin-top: 20px;
 }
-
 
 form p a {
-  color: #0046fd;
+  color: #00ffff;
   text-decoration: none;
   transition: color 0.3s ease;
-
 }
+
 form p a:hover {
-  color: #00fa6e;
+  color: #ff00ff;
 }
-
 
 input[type="submit"]:hover {
-  background-color: #0046fd;
+  background: linear-gradient(135deg, #0046ff, #ff00aa);
+  transform: scale(1.05);
 }
+

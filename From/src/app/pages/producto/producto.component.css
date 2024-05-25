@@ -151,69 +151,59 @@ h1, h3 {
 /*  background-color: rgba(0, 198, 255, 0.2);*/
 /*}*/
 
-button {
-  background-color: #04f4cb; /* Neon purple */
-  color: #ffffff; /* White */
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  border-radius: 5px;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 1px;
-  outline: none;
-  box-shadow: 0 0 10px rgb(0, 253, 203); /* Neon glow */
-}
-
-button:hover {
-  background-color: #00fdcb; /* Neon purple */
-  transform: scale(1.05);
-}
-
-form {
-  width: 80%;
-  background-color: rgba(0, 0, 0, 0.6);
+/* Estilos mejorados para el formulario */
+.form-producto {
+  max-width: 400px;
+  margin: auto;
   padding: 20px;
-  margin: 20px 0;
+  background-color: #1e1e1e;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
-label {
-  margin-bottom: 10px;
-  color: #00c6ff; /* Neon purple */
-  font-weight: bold;
+.form-producto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.3);
 }
 
-input {
-  padding: 15px;
+.form-group {
   margin-bottom: 20px;
-  border: 1px solid #00c6ff; /* Neon purple */
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1); /* Neon purple with transparency */
-  color: #ffffff; /* White */
-  font-size: 1rem;
-  outline: none;
 }
 
-input[type="submit"] {
-  background-color: #00c6ff; /* Neon purple */
-  color: #ffffff; /* White */
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+.form-group label {
   font-weight: bold;
-  border-radius: 5px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  outline: none;
-  box-shadow: 0 0 10px rgba(0, 198, 255, 0.5); /* Neon glow */
+  color: #fff;
 }
 
-input[type="submit"]:hover {
-  background-color: #00fdcb; /* Neon purple */
-  transform: scale(1.05);
+.form-control {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  background-color: #555;
+}
+
+.btn-add {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #ff7a59;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add:hover {
+  background-color: #ff4d00;
 }
