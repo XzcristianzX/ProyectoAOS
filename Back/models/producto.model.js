@@ -1,10 +1,9 @@
 import pgService from "../services/pg.service.js";
 
-// Método para obtener todos los productos
 export const getProductoAll = async () => {
     const pg = new pgService();
     try {
-        return await pg.connection.query("SELECT * FROM producto");
+        return await pg.connection.query('SELECT * FROM producto');
     } catch (error) {
         throw new Error(error.message);
     }
@@ -29,13 +28,14 @@ export const getProductoName = async (nombre) => {
     }
 }
 
-export const createProduct = async (detalle, nombre, valor) => {
+export const createProduct = async (detalle, nombre, valor, img) => {
     const pg = new pgService();
     try {
         if (!detalle || !nombre || valor === undefined || valor === null) {
             throw new Error("Faltan detalles, nombre o valor del producto");
         } else {
-            const result = await pg.connection.one('INSERT INTO producto(detalle, nombre, valor) VALUES ($1, $2, $3) RETURNING id_producto,detalle, nombre, valor', [detalle, nombre, valor]);
+            const query = 'INSERT INTO producto(detalle, nombre, valor, img) VALUES ($1, $2, $3, $4) RETURNING id_producto, detalle, nombre, valor, img';
+            const result = await pg.connection.one(query, [detalle, nombre, valor, img]);
             return result;
         }
     } catch (error) {
@@ -43,13 +43,14 @@ export const createProduct = async (detalle, nombre, valor) => {
     }
 };
 
-export const updateProduct = async (detalle, nombre, valor, id) => {
+export const updateProduct = async (detalle, nombre, valor, id, img) => {
     const pg = new pgService();
     try {
         if (!detalle || !nombre || valor === undefined || valor === null || !id) {
             throw new Error("Faltan detalles, nombre, valor o ID de producto");
         } else {
-            const result = await pg.connection.oneOrNone('UPDATE producto SET detalle = $1, nombre = $2, valor = $3 WHERE id_producto = $4 RETURNING id_producto', [detalle, nombre, valor, id]);
+            const query = 'UPDATE producto SET detalle = $1, nombre = $2, valor = $3, img = $4 WHERE id_producto = $5 RETURNING id_producto';
+            const result = await pg.connection.oneOrNone(query, [detalle, nombre, valor, img, id]);
             if (!result) {
                 throw new Error(`No se encontró ningún producto con el ID: ${id}`);
             }
