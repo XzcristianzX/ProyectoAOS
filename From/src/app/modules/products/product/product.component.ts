@@ -3,6 +3,7 @@ import {TableComponent} from "@app/shared/layout/table/table.component";
 import {TableActions, TableColumn} from "@app/shared/layout/interfaces/table-actions";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {ProductEditComponent} from "@app/modules/products/product-edit/product-edit.component";
+import {ProductCrearComponent} from "@app/modules/products/product-crear/product-crear.component";
 import {AlertService} from "@app/core/services/alert.service";
 import {ProductsService} from "@app/modules/products/services/products.service";
 import {LoadingService} from "@app/core/services/loading.service";
@@ -26,6 +27,7 @@ export class ProductComponent implements OnInit {
     delete: true,
   };
   columnsTable: TableColumn[] = [
+    { name: 'Id', key: 'id_producto', type: 'text' },
     { name: 'Nombre', key: 'nombre', type: 'text' },
     { name: 'Precio', key: 'valor', type: 'text' },
     { name: 'Descripción', key: 'detalle', type: 'text' },
@@ -63,7 +65,7 @@ export class ProductComponent implements OnInit {
 
   editProduct(value: any) {
     const refDialog = this._dialog.open(ProductEditComponent, {
-      data: value.id_producto,
+      data: value,
     });
     refDialog.afterClosed().subscribe((value) => {
       if (value) {
@@ -71,6 +73,7 @@ export class ProductComponent implements OnInit {
       }
     });
   }
+
 
   deleteProduct(value: any) {
     this._loading.show();
@@ -88,7 +91,7 @@ export class ProductComponent implements OnInit {
   }
 
   addProduct() {
-    const refDialog = this._dialog.open(ProductEditComponent, {});
+    const refDialog = this._dialog.open(ProductCrearComponent, {});
     refDialog.afterClosed().subscribe((value) => {
       if (value) {
         this.getAllProduct();

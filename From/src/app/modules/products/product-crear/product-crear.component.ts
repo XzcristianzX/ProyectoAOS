@@ -24,21 +24,21 @@ import {IMAGE_lOGO_EXTENSIONS} from "@app/core/utils/consts";
     TrimDirective,
     InputMaskDirective
   ],
-  templateUrl: './product-edit.component.html',
-  styleUrl: './product-edit.component.scss'
+  templateUrl: './product-crear.component.html',
+  styleUrl: './product-crear.component.scss'
 })
-export class ProductEditComponent implements OnInit {
+export class ProductCrearComponent implements OnInit {
 
   productForm: FormGroup = new FormGroup({});
   screen: number = 1;
   images: string = '';
-  data: any;
+  data: any; // Definición para los datos inyectados desde el diálogo
 
   constructor(
     private _alert: AlertService,
     private _product: ProductsService,
     @Inject(MAT_DIALOG_DATA) public dialogData: any, // Cambiado para evitar conflicto con 'data'
-    private _dialog: MatDialogRef<ProductEditComponent>,
+    private _dialog: MatDialogRef<ProductCrearComponent>,
     private _loading: LoadingService,
     private fb: FormBuilder
   ) {}
@@ -75,20 +75,28 @@ export class ProductEditComponent implements OnInit {
     if (this.productForm.valid) {
       this._loading.show();
       const dataProduct = this.productForm.value;
-
-      const productId = this.data.id_producto;
-      this._product.updateProduct(productId, dataProduct).subscribe({
+      this._product.saveProduct(dataProduct).subscribe({
         next: () => {
           this.productForm.reset();
-          this._alert.success('Producto actualizado exitosamente');
+          this._alert.success('Producto registrado exitosamente');
           this._dialog.close(true);
           this._loading.hide();
         },
         error: (error) => {
-          this._alert.error(error.error.message || "Hubo un problema al actualizar el producto.");
+          this._alert.error(error.error.message || "Hubo un problema al registrar el producto.");
           this._loading.hide();
         }
       });
+    }
+  }
+
+
+  changeScreen(screen: number) {
+    if (this.productForm.valid) {
+      // Lógica para cambiar la pantalla si es necesario
+    } else {
+      this.productForm.markAllAsTouched();
+      this._alert.warning('Debes completar todos los campos');
     }
   }
 }

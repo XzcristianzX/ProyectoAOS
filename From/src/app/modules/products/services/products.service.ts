@@ -20,8 +20,8 @@ export class ProductsService {
     return this._http.get<any>('http://localhost:3300/producto/' + productId)
   }
 
-  updateProduct(productId: string, data: any): Observable<any> {
-    return this._http.put<any>(`http://localhost:3300/producto/${productId}`, data);
+  public updateProduct(productId: any, dataProduct: any): Observable<any> {
+    return this._http.put(`http://localhost:3300/producto/` + productId, dataProduct);
   }
 
   public saveProduct(data: any): Observable<any> {
@@ -33,19 +33,5 @@ export class ProductsService {
   }
 
 
-  public converterToBase64(file: File): Observable<any> {
-    return new Observable<string | ArrayBuffer | null>(observer => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        observer.next(fileReader.result);
-        observer.complete();
-      };
-      fileReader.onerror = error => {
-        observer.error(error);
-        observer.complete();
-      }
-    });
-  }
 
 }

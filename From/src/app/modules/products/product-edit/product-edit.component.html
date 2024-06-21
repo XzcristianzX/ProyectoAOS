@@ -1,14 +1,22 @@
 <div class="wrapper-product-edit">
-  <span class="title-product">{{ this.data ? '¡Edita tu producto!' : '¡Registra tu producto!' }} </span>
+  <span class="title-product">{{ data ? '¡Edita tu producto!' : '¡Registra tu producto!' }}</span>
   <span class="description-product">
     {{
-      this.data ? '¡Hola! Puedes editar este producto para actualizar su información, cambiar el precio, modificar ' +
+      data ? '¡Hola! Puedes editar este producto para actualizar su información, cambiar el precio, modificar ' +
         'las imágenes o ajustar las descripciones fácilmente.' : '¡Hola! Agrega un nuevo producto fácilmente llenando la ' +
-        'información, subiendo una imágen y estableciendo el precio. ¡Es rápido y sencillo!'
+        'información, subiendo una imagen y estableciendo el precio. ¡Es rápido y sencillo!'
     }}
   </span>
   <div class="form-and-image">
     <form class="grid" autocomplete="off" [formGroup]="productForm">
+      <div class="col-12">
+        <div class="form-container">
+          <div class="form-group">
+            <label class="form-label" for="Id">Id producto</label>
+            <input id="Id" type="text" formControlName="Id" placeholder="Digite el ID del producto" class="form-input">
+          </div>
+        </div>
+      </div>
       <div class="col-12">
         <div class="form-container">
           <div class="form-group">
