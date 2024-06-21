@@ -1,0 +1,76 @@
+<div class="wrapper-product-edit">
+  <span class="title-product">{{ this.data ? '¡Edita tu producto!' : '¡Registra tu producto!' }} </span>
+  <span class="description-product">
+    {{
+      this.data ? '¡Hola! Puedes editar este producto para actualizar su información, cambiar el precio, modificar ' +
+        'las imágenes o ajustar las descripciones fácilmente.' : '¡Hola! Agrega un nuevo producto fácilmente llenando la ' +
+        'información, subiendo una imágen y estableciendo el precio. ¡Es rápido y sencillo!'
+    }}
+  </span>
+  <div class="form-and-image">
+    <form class="grid" autocomplete="off" [formGroup]="productForm">
+      @if (screen == 1) {
+        <div class="col-12">
+          <div class="form-container">
+            <div class="form-group">
+              <label class="form-label" for="name">Nombre del producto</label>
+              <input id="name" type="text" appInputMask="alphaNumericAccents" appTrim appMessageErrors
+                     formControlName="title"
+                     placeholder="Digite el nombre del producto" class="form-input">
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-container">
+            <div class="form-group">
+              <label class="form-label" for="detalle">Descripción del producto</label>
+              <input id="detalle" appInputMask="alphaNumericAccents" type="text" appTrim appMessageErrors
+                     formControlName="detalle"
+                     placeholder="Digite la descripción del producto" class="form-input">
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-container">
+            <div class="form-group">
+              <label class="form-label" for="valor">Precio del producto</label>
+              <input id="valor" type="text" appInputMask="float" appTrim appMessageErrors formControlName="price"
+                     placeholder="Digite el precio del producto" class="form-input">
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn" (click)="changeScreen(2)">Siguiente</button>
+        </div>
+      } @else if (screen === 2) {
+          <div class="container-upload-image" (change)="addImage($event)">
+              <label for="add-image">Sube tu imágen aquí</label>
+              <input id="add-image" type="file">
+          </div>
+        <div class="images-upload">
+          @if (images) {
+            <div class="image-product">
+              <img src="{{images}}" alt="image-product">
+              <em class="icon-trash absolute-trash" (click)="deleteImage()"></em>
+            </div>
+          }
+        </div>
+        <div class="col-12 group-btn">
+          <button class="btn btn-return" (click)="screen = 1"><em class="icon-arrow-left"> </em></button>
+          <button class="btn btn-g"
+                  (click)="sendDataRegisterProduct()">{{ this.data ? 'Editar producto' : 'Registrar producto' }}
+          </button>
+        </div>
+      }
+    </form>
+    @if (screen == 1){
+      <div class="image-of-form">
+        <img src="assets/images/product.png" alt="foto form 1">
+      </div>
+    } @else if (screen == 2){
+      <div class="image-of-form">
+        <img src="assets/images/no-images-uploads.png" alt="foto form 2">
+      </div>
+    }
+  </div>
+</div>

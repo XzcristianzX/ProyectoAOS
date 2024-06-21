@@ -3,9 +3,13 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "clasedehoy": {
+    "sales-management": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,20 +17,30 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/clasedehoy",
+            "outputPath": "dist/sales-management",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss",
+              "src/assets/fonts/style.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/styles/scss",
+                "src/assets/fonts/style.css"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -57,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "clasedehoy:build:production"
+              "buildTarget": "sales-management:build:production"
             },
             "development": {
-              "buildTarget": "clasedehoy:build:development"
+              "buildTarget": "sales-management:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -68,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "clasedehoy:build"
+            "buildTarget": "sales-management:build"
           }
         },
         "test": {
@@ -79,13 +93,23 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "src/assets/fonts/style.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "@angular/material/prebuilt-themes/indigo-pink.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/styles/scss",
+                "src/assets/fonts/style.css"
+              ]
+            },
             "scripts": []
           }
         }
@@ -93,6 +117,6 @@
     }
   },
   "cli": {
-    "analytics": "4508c085-58bc-4684-a695-4851f0d20ed0"
+    "analytics": "f480fd8c-57b7-4695-82a2-0c6f0f96311f"
   }
 }

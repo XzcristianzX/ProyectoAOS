@@ -1,0 +1,60 @@
+<div class="wrapper-table">
+  <div class="top-table">
+    <div class="content-left">
+      <div class="search-group">
+        <input autocomplete="off" class="search-input"
+               placeholder="Búsqueda rápida">
+        <label><em class="icon-search"></em></label>
+      </div>
+    </div>
+    <div class="content-right">
+      <div class="actions-group">
+        <button class="button-action" (click)="addItem()">
+          <span> {{ buttonActionName }}</span> <em class="icon-plus"> </em>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="table-container">
+    <table>
+      <thead>
+      <tr>
+        @for (column of tableColumns; track $index) {
+          <th>{{ column.name }}</th>
+        }
+        <th>{{ rowActionName }}</th>
+
+      </tr>
+      </thead>
+      <tbody>
+        @if (tableData.length > 0) {
+          <tr *ngFor="let element of tableData">
+            @for (tableColumn of tableColumns; track $index) {
+              <td>
+                {{ element | getterProperty: tableColumn.key }}
+              </td>
+            }
+            <td class="container-buttons">
+              @if (action.edit) {
+                <button (click)="editItem(element);"
+                        class="btn-actions">
+                  <em class="icon-pencil-f"></em>
+                </button>
+              }
+              @if (action.delete) {
+                <button (click)="deleteItem(element);"
+                        class="btn-actions">
+                  <em class="icon-trash"></em>
+                </button>
+              }
+            </td>
+          </tr>
+        } @else {
+          <td [colSpan]="tableColumns.length + 1" style="border-right: 2px solid #ff82ae">
+            <span class="no-data"> <em class="icon-info" style="padding-right: 10px;"></em> No hay productos. </span>
+          </td>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

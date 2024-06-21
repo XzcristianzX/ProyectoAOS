@@ -1,37 +1,45 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { ChatComponent } from './pages/chat/chat.component';
-import { ErrorComponent } from './pages/error/error.component';
-import {LoginComponent} from "./pages/login/login.component";
+import {Routes} from '@angular/router';
+import {DashboardComponent} from "@app/modules/dashboard/dashboard.component";
+import {MainComponent} from "@app/modules/administration/main/main.component";
+import {authGuard} from "@app/core/guards/auth.guard";
+import {noAuthGuard} from "@app/core/guards/no-auth.guard";
+import {NotFoundComponent} from "@app/shared/layout/not-found/not-found.component";
+import {LandingHomeComponent} from "@app/shared/layout/landing-home/landing-home.component";
 
 export const routes: Routes = [
-    {
+  {
+    path: '',
+    loadChildren: () => import('@app/modules/auth/auth.module').then(m => m.AuthModule),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'administration',
+    component: MainComponent,
+    canActivate: [noAuthGuard],
+    children: [
+      {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'login'
-    },
-    {
-      path: 'login',
-      component: LoginComponent
-    },
-    {
-        path: 'home',
-        component: HomeComponent
-    },
-    {
-        path: 'home2/:id',
-        component: HomeComponent
-    },
-    {
-        path: 'chat',
-        component: ChatComponent
-    },
-    {
-        path: 'producto',
-        loadComponent: ()=> import("./pages/producto/producto.component")
-    },
-    {
-        path: '**',
-        component: ErrorComponent
-    }
+        pathMatch: "full",
+        redirectTo: 'product'
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [noAuthGuard]
+      },
+      {
+        path: 'product',
+        loadChildren: () => import('@app/modules/products/products.module').then(m => m.ProductsModule),
+        canActivate: [noAuthGuard]
+      }
+    ]
+  },
+  {
+    path: 'home',
+    component: LandingHomeComponent,
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+  }
 ];

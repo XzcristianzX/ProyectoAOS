@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { ChatComponent } from './pages/chat/chat.component';
+import { RouterOutlet } from '@angular/router';
+import {LoadingComponent} from "@app/shared/layout/loading/loading.component";
+import {LoadingService} from "@app/core/services/loading.service";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ChatComponent, RouterLink, FormsModule],
+  imports: [RouterOutlet, LoadingComponent, AsyncPipe],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'clasedehoy';
-  username: string = '';
-  password: string = '';
+  title = 'sales-management';
 
-  constructor(private router: Router) {}
+  loading = this._loader.loading$;
 
-
+  constructor(
+    private _loader: LoadingService
+  ) {
+  }
 }
