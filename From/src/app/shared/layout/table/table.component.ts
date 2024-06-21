@@ -3,11 +3,13 @@ import {TableActions, TableColumn} from "@app/shared/layout/interfaces/table-act
 import {TABLE_ACTIONS} from "@app/core/utils/consts";
 import {GetterPropertyPipe} from "@app/shared/layout/pipes/getter-property.pipe";
 import {NgForOf} from "@angular/common";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-table',
   standalone: true,
   imports: [
+    CommonModule,
     GetterPropertyPipe,
     NgForOf
   ],

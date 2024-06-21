@@ -29,6 +29,7 @@ export class ProductComponent implements OnInit {
     { name: 'Nombre', key: 'nombre', type: 'text' },
     { name: 'Precio', key: 'valor', type: 'text' },
     { name: 'Descripción', key: 'detalle', type: 'text' },
+    { name: 'Imagen', key: 'img', type: 'image' }
   ];
   tableData: any = [];
 
@@ -48,16 +49,21 @@ export class ProductComponent implements OnInit {
     this._loading.show();
     this._product.getAllProducts().subscribe({
       next: (data) => {
-        this.tableData = data;
+        this.tableData = data.result;
         this._loading.hide();
         this._changeDetectorRef.detectChanges();  // Forzar detección de cambios
       },
+      error: (err) => {
+        this._alert.error('Error al cargar productos');
+        this._loading.hide();
+      }
     });
   }
 
+
   editProduct(value: any) {
     const refDialog = this._dialog.open(ProductEditComponent, {
-      data: value.product_id,
+      data: value.id_producto,
     });
     refDialog.afterClosed().subscribe((value) => {
       if (value) {
@@ -68,7 +74,7 @@ export class ProductComponent implements OnInit {
 
   deleteProduct(value: any) {
     this._loading.show();
-    this._product.deleteProduct(value.product_id).subscribe({
+    this._product.deleteProduct(value.id_producto).subscribe({
       next: () => {
         this.getAllProduct();
         this._loading.hide();

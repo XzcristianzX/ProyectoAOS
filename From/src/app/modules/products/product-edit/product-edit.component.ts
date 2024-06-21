@@ -29,10 +29,9 @@ import {IMAGE_lOGO_EXTENSIONS} from "@app/core/utils/consts";
 })
 export class ProductEditComponent implements OnInit {
 
-  productForm: FormGroup = new FormGroup({})
+  productForm: FormGroup = new FormGroup({});
   screen: number = 1;
   images: string = '';
-
 
   constructor(
     private _alert: AlertService,
@@ -46,7 +45,7 @@ export class ProductEditComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     if (this.data) {
-      this.getProductById(this.data)
+      this.getProductById(this.data);
     }
   }
 
@@ -54,18 +53,19 @@ export class ProductEditComponent implements OnInit {
     this._loading.show();
     this._product.getProductById(id).subscribe({
       next: (data) => {
-        console.log(data)
+        console.log(data);
         this.setDataProduct(data);
         this._loading.hide();
         this.images = data.product_image;
       }
-    })
+    });
   }
 
   setDataProduct(data: any) {
     this.productForm.get('nombre')?.setValue(data['product_name']);
     this.productForm.get('valor')?.setValue(data['product_price']);
     this.productForm.get('detalle')?.setValue(data['product_detail']);
+    this.productForm.get('img')?.setValue(data['product_image']);
   }
 
   changeScreen(screen: number) {
@@ -73,74 +73,63 @@ export class ProductEditComponent implements OnInit {
       this.screen = screen;
     } else {
       this.productForm.markAllAsTouched();
-      this._alert.warning('Debes completar todos los campos')
+      this._alert.warning('Debes completar todos los campos');
     }
   }
 
   initForm(): void {
     this.productForm = new FormGroup({
-      title: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.minLength(3)]),
-      description: new FormControl('', [Validators.required, Validators.maxLength(500), Validators.minLength(3)]),
-      price: new FormControl('', [Validators.required]),
-      images: new FormControl(''),
-    })
-  }
-
-  addImage(event: any): void {
-    const capturedFile = event.target.files[0];
-
-    const isValidImage = IMAGE_lOGO_EXTENSIONS.some(extension =>
-      extension === capturedFile.type
-    )
-
-    if (isValidImage) {
-      this._product.converterToBase64(capturedFile).subscribe({
-        next: (base64data): void => {
-          this.images = base64data;
-          this._alert.success('Imagen subida correctamente');
-        },
-      });
-    } else {
-      this._alert.warning('Tipo de imágen no soportado');
-    }
-  }
-
-  deleteImage() {
-    this.images = '';
-    this._alert.success("Imagen eliminado exitosamente")
+      nombre: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.minLength(3)]),
+      detalle: new FormControl('', [Validators.required, Validators.maxLength(500), Validators.minLength(3)]),
+      valor: new FormControl('', [Validators.required]),
+      img: new FormControl('', [Validators.required]),
+    });
   }
 
   sendDataRegisterProduct() {
-    if (this.productForm.valid && this.images) {
+    if (this.productForm.valid) {
       this._loading.show();
       const dataProduct: any = {
-        product_name: this.productForm.get("nombre")?.value,
-        product_price: this.productForm.get("valor")?.value,
-        product_detail: this.productForm.get("detalle")?.value,
-        product_image: this.images
+        detalle: this.productForm.get("detalle")?.value,
+        nombre: this.productForm.get("nombre")?.value,
+        valor: this.productForm.get("valor")?.value,
+        img: this.productForm.get("img")?.value
+      };
+
+      if (this.data && this.data.id) {
+        // Actualizar producto existente
+        const productId = this.data.id;
+        this._product.updateProduct(productId, dataProduct).subscribe({
+          next: () => {
+            this.productForm.reset();
+            this.images = '';
+            this._alert.success('Producto actualizado exitosamente');
+            this._dialog.close(true);
+            this._loading.hide();
+          },
+          error: (error) => {
+            this._alert.error(error.error.message || "Hubo un problema al actualizar el producto.");
+            this._loading.hide();
+          }
+        });
+      } else {
+        // Crear nuevo producto
+        this._product.saveProduct(dataProduct).subscribe({
+          next: () => {
+            this.productForm.reset();
+            this.images = '';
+            this._alert.success('Producto registrado exitosamente');
+            this._dialog.close(true);
+            this._loading.hide();
+          },
+          error: (error) => {
+            this._alert.error(error.error.message || "Hubo un problema al registrar el producto.");
+            this._loading.hide();
+          }
+        });
       }
-
-      const petition: Observable<any> = this.data ? this._product.updateProduct(this.data, dataProduct) :
-        this._product.saveProduct(dataProduct);
-      petition.subscribe({
-        next: () => {
-          this.productForm.reset();
-          this.images = '';
-          this.data ?
-            this._alert.success('Producto actualizado exitosamente') : this._alert.success('Producto registrado exitosamente')
-          this._dialog.close(true);
-          this._loading.hide();
-
-        },
-        error: (error) => {
-          this.data ?
-            this._alert.error(error.error.data) : this._alert.error("Hubo un problema al registrar el producto.");
-          this._loading.hide();
-        }
-      });
     } else {
-      this._alert.warning('Debes agregar una imagen')
+      this._alert.warning('Debes completar todos los campos y agregar una imagen');
     }
   }
-
 }

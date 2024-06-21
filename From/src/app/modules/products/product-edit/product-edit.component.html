@@ -9,68 +9,50 @@
   </span>
   <div class="form-and-image">
     <form class="grid" autocomplete="off" [formGroup]="productForm">
-      @if (screen == 1) {
-        <div class="col-12">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label" for="name">Nombre del producto</label>
-              <input id="name" type="text" appInputMask="alphaNumericAccents" appTrim appMessageErrors
-                     formControlName="title"
-                     placeholder="Digite el nombre del producto" class="form-input">
-            </div>
+      <div class="col-12">
+        <div class="form-container">
+          <div class="form-group">
+            <label class="form-label" for="nombre">Nombre del producto</label>
+            <input id="nombre" type="text" appInputMask="alphaNumericAccents" appTrim appMessageErrors
+                   formControlName="nombre"
+                   placeholder="Digite el nombre del producto" class="form-input">
           </div>
         </div>
-        <div class="col-12">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label" for="detalle">Descripción del producto</label>
-              <input id="detalle" appInputMask="alphaNumericAccents" type="text" appTrim appMessageErrors
-                     formControlName="detalle"
-                     placeholder="Digite la descripción del producto" class="form-input">
-            </div>
+      </div>
+      <div class="col-12">
+        <div class="form-container">
+          <div class="form-group">
+            <label class="form-label" for="detalles">Descripción del producto</label>
+            <input id="detalles" appInputMask="alphaNumericAccents" type="text" appTrim appMessageErrors
+                   formControlName="detalle"
+                   placeholder="Digite la descripción del producto" class="form-input">
           </div>
         </div>
-        <div class="col-12">
-          <div class="form-container">
-            <div class="form-group">
-              <label class="form-label" for="valor">Precio del producto</label>
-              <input id="valor" type="text" appInputMask="float" appTrim appMessageErrors formControlName="price"
-                     placeholder="Digite el precio del producto" class="form-input">
-            </div>
+      </div>
+      <div class="col-12">
+        <div class="form-container">
+          <div class="form-group">
+            <label class="form-label" for="img">URL de la imagen del producto</label>
+            <input id="img" type="text" appTrim appMessageErrors formControlName="img"
+                   placeholder="Digite la URL de la imagen del producto" class="form-input">
           </div>
         </div>
-        <div class="col-12">
-          <button class="btn" (click)="changeScreen(2)">Siguiente</button>
-        </div>
-      } @else if (screen === 2) {
-          <div class="container-upload-image" (change)="addImage($event)">
-              <label for="add-image">Sube tu imágen aquí</label>
-              <input id="add-image" type="file">
+      </div>
+      <div class="col-12">
+        <div class="form-container">
+          <div class="form-group">
+            <label class="form-label" for="valor">Precio del producto</label>
+            <input id="valor" type="text" appInputMask="float" appTrim appMessageErrors formControlName="valor"
+                   placeholder="Digite el precio del producto" class="form-input">
           </div>
-        <div class="images-upload">
-          @if (images) {
-            <div class="image-product">
-              <img src="{{images}}" alt="image-product">
-              <em class="icon-trash absolute-trash" (click)="deleteImage()"></em>
-            </div>
-          }
         </div>
-        <div class="col-12 group-btn">
-          <button class="btn btn-return" (click)="screen = 1"><em class="icon-arrow-left"> </em></button>
-          <button class="btn btn-g"
-                  (click)="sendDataRegisterProduct()">{{ this.data ? 'Editar producto' : 'Registrar producto' }}
-          </button>
-        </div>
-      }
+      </div>
+      <button class="btn btn-g"
+              (click)="sendDataRegisterProduct()">{{ this.data ? 'Editar producto' : 'Registrar producto' }}
+      </button>
     </form>
-    @if (screen == 1){
-      <div class="image-of-form">
-        <img src="assets/images/product.png" alt="foto form 1">
-      </div>
-    } @else if (screen == 2){
-      <div class="image-of-form">
-        <img src="assets/images/no-images-uploads.png" alt="foto form 2">
-      </div>
-    }
+    <div class="image-of-form">
+      <img src="assets/images/product.png" alt="foto form 1">
+    </div>
   </div>
 </div>

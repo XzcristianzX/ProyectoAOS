@@ -9,13 +9,13 @@ export const getProductoAll = async () => {
     }
 }
 
-export const getProductoName = async (nombre) => {
+export const getProductoId = async (id) => {
     const pg = new pgService();
     try {
-        if (!nombre) {
+        if (!id) {
             throw new Error("Se requiere proporcionar un nombre de producto");
         } else {
-            const result = await pg.connection.manyOrNone('SELECT * FROM producto WHERE nombre = $1', [nombre]);
+            const result = await pg.connection.manyOrNone('SELECT * FROM producto WHERE id_producto = $1', [id]);
             if (!result) {
                 throw new Error(`Error inesperado al buscar el producto con el nombre: ${nombre}`);
             } else if (result.length === 0) {

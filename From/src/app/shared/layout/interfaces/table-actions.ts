@@ -7,5 +7,5 @@ export interface TableActions {
 export interface TableColumn {
   name: string;
   key: string;
-  type: 'text' | 'status' | 'statusName' | 'statusIf' | 'dateTime' | 'textLogoFranchise' | 'currency' | 'requestType' | 'payments' | 'date' | 'portalType';
+  type: 'text' | 'image' | 'status' | 'statusName' | 'statusIf' | 'dateTime' | 'textLogoFranchise' | 'currency' | 'requestType' | 'payments' | 'date' | 'portalType';
 }

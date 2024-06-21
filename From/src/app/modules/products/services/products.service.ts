@@ -16,12 +16,12 @@ export class ProductsService {
     return this._http.get<any>('http://localhost:3300/producto/All');
   }
 
-  public getProductById(productId: any): Observable<any> {
+  public getProductById(productId: string): Observable<any> {
     return this._http.get<any>('http://localhost:3300/producto/' + productId)
   }
 
-  public updateProduct(productId: any, data: any): Observable<any> {
-    return this._http.put<any>('http://localhost:3300/producto/' + productId, data)
+  updateProduct(productId: string, data: any): Observable<any> {
+    return this._http.put<any>(`http://localhost:3300/producto/${productId}`, data);
   }
 
   public saveProduct(data: any): Observable<any> {
